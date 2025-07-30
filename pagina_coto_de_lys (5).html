@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Coto de Lys</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Georgia', serif;
+      background-color: #ffffff;
+      color: #000000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-image: linear-gradient(135deg, #ffffff 0%, #f2f2f2 100%);
+    }
+    .cuadro {
+      width: 90%;
+      max-width: 1000px;
+      height: 90vh;
+      display: flex;
+      border-radius: 12px;
+      background: #fff;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      overflow: hidden;
+    }
+    aside {
+      width: 220px;
+      background-color: #fafafa;
+      padding: 2rem 1rem;
+      border-right: 1px solid #e0e0e0;
+    }
+    aside h2 {
+      font-size: 1.3rem;
+      margin-bottom: 1.5rem;
+      color: #000000;
+      text-align: center;
+    }
+    aside ul {
+      list-style: none;
+      padding: 0;
+    }
+    aside li {
+      color: #000000;
+      cursor: pointer;
+      margin-bottom: 1rem;
+      font-weight: bold;
+      transition: color 0.3s;
+    }
+    aside li:hover {
+      color: #555;
+    }
+    main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      background-color: #ffffff;
+    }
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.5rem 2rem 1rem;
+      background-color: #ffffff;
+    }
+    header h1 {
+      color: #000000;
+      font-size: 2.2rem;
+      margin: 0;
+      letter-spacing: 1px;
+    }
+    .productos {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.5rem;
+      padding: 1.5rem 2rem;
+      overflow-y: auto;
+    }
+    .producto {
+      background-color: #fff;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      text-align: center;
+      padding: 1rem;
+      transition: transform 0.3s ease;
+    }
+    .producto:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    .producto img {
+      width: 100%;
+      height: auto;
+      border-radius: 8px;
+    }
+    .producto h3 {
+      color: #000000;
+      font-size: 1.2rem;
+      margin: 1rem 0 0.5rem;
+    }
+    .producto p {
+      color: #333;
+      padding: 0 1rem 1rem;
+    }
+    .producto button {
+      background: #000000;
+      color: #ffffff;
+      border: none;
+      padding: 0.6rem 1.2rem;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+    .producto button:hover {
+      background: #444;
+    }
+    #searchContainer {
+      padding: 0 2rem;
+      margin-top: 0.5rem;
+    }
+    footer {
+      text-align: center;
+      padding: 1rem;
+      font-size: 0.9rem;
+      color: #000000;
+    }
+  </style>
+</head>
+<body>
+  <div class="cuadro">
+    <aside>
+      <h2>Nuestra Colección</h2>
+      <ul>
+        <li onclick="mostrarCategoria('shorts')">Shorts</li>
+        <li onclick="mostrarCategoria('jeans')">Jeans</li>
+        <li onclick="mostrarCategoria('bolsos')">Bolsos</li>
+        <li onclick="mostrarCategoria('camisetas')">Camisetas</li>
+      </ul>
+    </aside>
+    <main>
+      <header>
+        <h1><a href="#" onclick="location.reload();" style="text-decoration: none; color: #000000;">Coto de Lys</a></h1>
+        <div style="display: flex; align-items: center; gap: 1rem;">
+          <i class="fas fa-search" style="cursor: pointer; font-size: 1.2rem;" onclick="toggleSearchBar()"></i>
+          <i class="fas fa-shopping-cart" style="cursor: pointer; font-size: 1.2rem;"></i>
+        </div>
+      </header>
+
+      <div id="searchContainer" style="display: none;">
+        <input type="text" id="buscador" placeholder="Buscar..." onkeyup="buscarProducto()" style="padding: 0.5rem 1rem; border: 1px solid #000000; border-radius: 20px; width: 200px; font-size: 1rem;">
+      </div>
+
+      <section class="productos">
+        <!-- Producto inicial eliminado -->
+      </section>
+
+      <footer>
+  <p>Vendemos todos los sábados a las 21:00</p>
+</footer>
+    </main>
+  </div>
+
+<script>
+  const productosHTML = {
+    shorts: `
+      <div class="producto">
+        <img src="https://images.unsplash.com/photo-1520975913443-d31b7d4195a4" alt="Shorts beige">
+        <h3>Shorts Beige</h3>
+        <p>Estilo fresco y cómodo para el verano.</p>
+        <button>Añadir a la compra</button>
+      </div>`,
+    jeans: `
+      <div class="producto">
+        <img src="https://images.unsplash.com/photo-1618354691373-d851d8d75803" alt="Jeans clásicos">
+        <h3>Jeans Clásicos</h3>
+        <p>Corte perfecto y combinables con todo.</p>
+        <button>Añadir a la compra</button>
+      </div>`,
+    bolsos: `
+      <div class="producto">
+        <h3>Bolso Elegante</h3>
+        <p>Perfecto para completar tu outfit.</p>
+        <button>Añadir a la compra</button>
+      </div>`,
+    camisetas: `
+      <div class="producto">
+        <img src="https://images.unsplash.com/photo-1602810310591-d3b5ed266c10" alt="Camiseta blanca">
+        <h3>Camiseta Blanca</h3>
+        <p>Básico esencial para tu armario.</p>
+        <button>Añadir a la compra</button>
+      </div>`
+  };
+
+  function mostrarCategoria(categoria) {
+    const contenedor = document.querySelector(".productos");
+    contenedor.innerHTML = productosHTML[categoria] || "<p>No hay productos.</p>";
+  }
+
+  function buscarProducto() {
+    const termino = document.getElementById('buscador').value.toLowerCase();
+    const contenedor = document.querySelector(".productos");
+    let resultado = '';
+    Object.values(productosHTML).forEach(html => {
+      if (html.toLowerCase().includes(termino)) {
+        resultado += html;
+      }
+    });
+    contenedor.innerHTML = resultado || '<p>No se encontraron productos.</p>';
+  }
+
+  function toggleSearchBar() {
+    const searchContainer = document.getElementById('searchContainer');
+    searchContainer.style.display = searchContainer.style.display === 'none' ? 'block' : 'none';
+  }
+</script>
+</body>
+</html>
